@@ -1,25 +1,17 @@
-import java.util.List;
-
 public class DecisionTree {
 
     private DecisionNode root;
 
     public DecisionTree() {
         this.root = new DecisionNode();
+        this.root.setName("BASE");
     }
 
-    private class DecisionNode {
-        private String name;
-        private List<DecisionNode> children;
+    public DecisionNode getRootNode() {
+        return root;
+    }
 
-        private DecisionNode() {
-            this.name = null;
-            this.children = null;
-        }
-
-        private DecisionNode(String name, List<DecisionNode> children) {
-            this.name = name;
-            this.children = children;
-        }
+    public String toString() {
+        return this.root.toString();
     }
 }

@@ -8,7 +8,7 @@ public class DecisionNode {
     // Constants
     private static final int MAX_NAME_LENGHT = 50;
 
-    // Fields of a decision node
+    // Fields for the decision node
     private String name;
     private List<DecisionNode> children;
     private DecisionNode parent;
@@ -56,13 +56,14 @@ public class DecisionNode {
      * pre: child must not be null
      * return true if child successfully added
      */
-    public boolean addChild(String childName) {
+    public DecisionNode addChild(String childName) {
         if (childName == null) {
-            return false;
+            return null;
         }
 
-        this.children.add(new DecisionNode(childName, null, this));
-        return true;
+        DecisionNode child = new DecisionNode(childName, null, this);
+        this.children.add(child);
+        return child;
     }
 
     /*
@@ -75,7 +76,7 @@ public class DecisionNode {
         }
 
         for (String childToAdd : childrenNames) {
-            if (!addChild(childToAdd)) {
+            if (addChild(childToAdd) == null) {
                 return false;
             }
         }
@@ -90,23 +91,25 @@ public class DecisionNode {
     public String toString() {
         // use StringBuilder to prevent extra time complexity w/ normal strings
         StringBuilder res = new StringBuilder(50);
-        print(res, "", "");
+        print(res, "", "", 0);
         return res.toString();
     }
 
     /** Helper method for toString */
-    private void print(StringBuilder buffer, String prefix, String childrenPrefix) {
+    private void print(StringBuilder buffer, String prefix, String childrenPrefix, int level) {
         buffer.append(prefix);
-        buffer.append(name);
+        buffer.append(level + ". " + name);
         buffer.append("\n");
 
+        int nextLevel = 1;
         for (Iterator<DecisionNode> it = children.iterator(); it.hasNext();) {
             DecisionNode childNode = it.next();
             if (it.hasNext()) {
-                childNode.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
+                childNode.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ", nextLevel);
             } else {
-                childNode.print(buffer, childrenPrefix + "└── ", childrenPrefix + "    ");
+                childNode.print(buffer, childrenPrefix + "└── ", childrenPrefix + "    ", nextLevel);
             }
+            nextLevel++;
         }
     }
 }

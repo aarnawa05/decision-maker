@@ -1,15 +1,17 @@
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        printTreeTest();
+    public static void main(String[] args) throws IOException {
+        System.out.print(printTreeTest());
+        DecisionTree.createTreeFromFile("sampleTrees/decisionTree1");
     }
 
     /**
      * Testing visualization of decision tree
      */
-    public static void printTreeTest() {
+    public static String printTreeTest() {
         DecisionTree testTree = new DecisionTree();
         DecisionNode testRoot = testTree.getRootNode();
 
@@ -33,7 +35,7 @@ public class Main {
         testChildren3.get(0).addChildren(Arrays.asList(third_level_names[2]));
         testChildren3.get(2).addChildren(Arrays.asList(third_level_names[4]));
 
-        System.out.println(testTree);
+        return testTree.toString();
     }
 
 }

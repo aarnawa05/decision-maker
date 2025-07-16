@@ -20,10 +20,10 @@ public class DecisionNode {
     }
 
     public DecisionNode(String name, List<String> children, DecisionNode parent) {
-        this.name = name;
+        setName(name);
         this.children = new ArrayList<DecisionNode>();
-        this.parent = parent;
         addChildren(children);
+        setParent(parent);
     }
 
     /* Getters */
@@ -40,6 +40,11 @@ public class DecisionNode {
     }
 
     /* Setters */
+
+    /*
+     * pre: name must be a valid string and string length < MAX_NAME_LENGTH
+     * return true if the name was successfully set
+     */
     public void setName(String name) {
         if (name == null || name.length() > MAX_NAME_LENGHT) {
             throw new IllegalArgumentException("Error trying to setName of node - Must be a valid name");

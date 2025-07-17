@@ -1,11 +1,60 @@
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         System.out.print(printTreeTest());
-        DecisionTree.createTreeFromFile("sampleTrees/decisionTree1");
+        DecisionTree treeToUse = DecisionTree.createTreeFromFile("sampleTrees/decisionTree1");
+        runDecisions(treeToUse);
+    }
+
+    private static void runDecisions(DecisionTree tree) throws IOException {
+
+        Scanner k = new Scanner(System.in);
+        DecisionNode currentNode = tree.getRootNode();
+        do {
+            if (currentNode.getChildren() != null && currentNode.getChildren().size() > 0) {
+                printChildren(currentNode);
+                int decisionNumber = getDecisionNumber(k, currentNode);
+            } else {
+                // break out of loop?
+            }
+
+        } while (true);
+
+    }
+
+    private static void printChildren(DecisionNode currentNode) {
+        List<DecisionNode> children = currentNode.getChildren();
+        for (int child = 0; child < children.size(); child++) {
+            System.out.printf("%d. %s", child + 1, children.get(child));
+        }
+        System.out.println("Type a number to select a decision, or type exit to stop");
+    }
+
+    private static int getDecisionNumber(Scanner k, DecisionNode currentNode) {
+        if (k.hasNextInt()) {
+            int choice = k.nextInt();
+            // @todo this stuff
+            k.nextLine();
+            if (choice <= 0 && choice >= currentNode.getChildren().size()) {
+                return -1;
+            }
+            return choice;
+            // verify valid integer
+        } else if (k.hasNext()) {
+            String choice = k.nextLine();
+            if (choice.equalsIgnoreCase("exit")) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+
     }
 
     /**

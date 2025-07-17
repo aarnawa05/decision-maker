@@ -44,12 +44,14 @@ public class DecisionTree {
                 while (level < currentLevel) {
                     currentDecisionNode = currentDecisionNode.getParent();
                     if (currentDecisionNode == null) {
+                        f.close();
                         throw new IllegalArgumentException("Invalid file format");
                     }
                     currentLevel--;
                 }
                 child = currentDecisionNode.getParent().addChild(childName);
             } else {
+                f.close();
                 throw new IllegalArgumentException("Invalid file format");
             }
 

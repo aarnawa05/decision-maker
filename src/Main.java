@@ -14,15 +14,23 @@ public class Main {
 
         Scanner k = new Scanner(System.in);
         DecisionNode currentNode = tree.getRootNode();
+
         do {
             if (currentNode.getChildren() != null && currentNode.getChildren().size() > 0) {
                 printChildren(currentNode);
                 int decisionNumber = getDecisionNumber(k, currentNode);
+                if (decisionNumber == 0) {
+                    System.out.println("EXITING PROGRAM");
+                    break;
+                }
             } else {
-                // break out of loop?
+                break;
             }
-
         } while (true);
+
+        if (currentNode != null) {
+
+        }
 
     }
 

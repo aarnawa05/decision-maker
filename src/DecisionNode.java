@@ -9,12 +9,12 @@ public class DecisionNode {
     private static final int MAX_NAME_LENGHT = 50;
 
     // Fields for the decision node
-    private String name;
+    private String activityName;
     private List<DecisionNode> children;
     private DecisionNode parent;
 
     public DecisionNode() {
-        this.name = null;
+        this.activityName = null;
         this.children = new ArrayList<DecisionNode>();
         this.parent = null;
     }
@@ -27,8 +27,8 @@ public class DecisionNode {
     }
 
     /* Getters */
-    public String getName() {
-        return name;
+    public String getActivityName() {
+        return activityName;
     }
 
     public DecisionNode getParent() {
@@ -45,12 +45,12 @@ public class DecisionNode {
      * pre: name must be a valid string and string length < MAX_NAME_LENGTH
      * return true if the name was successfully set
      */
-    public void setName(String name) {
-        if (name == null || name.length() > MAX_NAME_LENGHT) {
+    public void setName(String activityName) {
+        if (activityName == null || activityName.length() > MAX_NAME_LENGHT) {
             throw new IllegalArgumentException("Error trying to setName of node - Must be a valid name");
         }
 
-        this.name = name;
+        this.activityName = activityName;
     }
 
     public void setParent(DecisionNode parent) {
@@ -103,7 +103,7 @@ public class DecisionNode {
     /** Helper method for toString */
     private void print(StringBuilder buffer, String prefix, String childrenPrefix, int level) {
         buffer.append(prefix);
-        buffer.append(level + ". " + name);
+        buffer.append(level + ". " + activityName);
         buffer.append("\n");
 
         int nextLevel = 1;

@@ -36,6 +36,8 @@ public class DecisionTree {
 
             DecisionNode child = null;
             String childName = line.substring(spaceIndex + 1, line.length());
+
+            // Check level based on number of dashes
             if (level == currentLevel + 1) {
                 child = currentDecisionNode.addChild(childName);
             } else if (level == currentLevel) {
@@ -59,6 +61,7 @@ public class DecisionTree {
             currentDecisionNode = child;
         }
 
+        f.close();
         System.out.println(resTree);
         return resTree;
     }

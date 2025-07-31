@@ -29,7 +29,7 @@ public class Main {
         } while (true);
 
         if (currentNode != null) {
-
+            System.out.println("Would you like to start on this task?");
         }
 
     }

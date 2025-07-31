@@ -8,7 +8,7 @@ public class DecisionTree {
 
     public DecisionTree() {
         this.root = new DecisionNode();
-        this.root.setName("BASE");
+        this.root.setActivityName("BASE");
     }
 
     /**
